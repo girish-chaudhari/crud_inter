@@ -23,7 +23,7 @@ let data = [
     },
     {
       id: 3,
-      name: "girish chaudhari",
+      name: "sagar bhai",
       email: "girish@gmail.com",
       mobile: "9021929562",
       project: "otm-admin-panel",
@@ -34,7 +34,7 @@ let data = [
     },
     {
       id: 4,
-      name: "sunil chaudhari",
+      name: "dummy jenil",
       email: "sunil@gmail.com",
       mobile: "9021929562",
       project: "otm-vendor",
