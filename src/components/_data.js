@@ -7,8 +7,8 @@ let data = [
       project: "otm",
       task: "admin panel",
       status: "progress",
-      start_time: "20/02/22",
-      end_time: "04/03/22",
+      start_time: "2022-03-11",
+      end_time: "2022-03-12",
     },
     {
       id: 2,
@@ -18,8 +18,8 @@ let data = [
       project: "otm-react",
       task: "admin panel",
       status: "done",
-      start_time: "20/02/22",
-      end_time: "04/03/22",
+      start_time: "2022-02-10",
+      end_time: "2022-02-20",
     },
     {
       id: 3,
@@ -29,8 +29,8 @@ let data = [
       project: "otm-admin-panel",
       task: "admin panel",
       status: "planned",
-      start_time: "20/02/22",
-      end_time: "04/03/22",
+      start_time: "2022-04-05",
+      end_time: "2022-04-12",
     },
     {
       id: 4,
@@ -40,8 +40,8 @@ let data = [
       project: "otm-vendor",
       task: "admin panel",
       status: "planned",
-      start_time: "20-02-22",
-      end_time: "04-03-22",
+      start_time: "2022-04-15",
+      end_time: "2022-04-25",
     },
   ];
 
