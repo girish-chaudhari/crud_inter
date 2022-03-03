@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { ToDoUserSchema } from "./ValidationSchema";
-import { Field, Formik } from "formik";
-import { data } from "./_data";
+import React, { useEffect, useState } from 'react';
+import { ToDoUserSchema } from './ValidationSchema';
+import { Field, Formik } from 'formik';
+import { data } from './_data';
 
 const DataCrud = () => {
   const [dataList, setDataList] = useState([]);
-  const [isUpdate, setIsUpdate]  = useState(false)
-  const [updatedId, setUpdateId] = useState(undefined)
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [updatedId, setUpdateId] = useState(undefined);
   const [updateState, setUpdateState] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    project: "",
-    task: "",
-    status: "",
-    start_time: "",
-    end_time: "",
-  })
+    name: '',
+    email: '',
+    mobile: '',
+    project: '',
+    task: '',
+    status: '',
+    start_time: '',
+    end_time: ''
+  });
 
   const [snapShot, setSnapShot] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
@@ -27,7 +27,6 @@ const DataCrud = () => {
   function fetchData() {
     setDataList(data);
   }
-
 
   const handleDelete = (id) => {
     let deletedData = [...dataList];
@@ -42,54 +41,50 @@ const DataCrud = () => {
     }
   };
 
-  const handleUpdate = (id)=> {
-      
-      let data = dataList.find(item => item.id === id)
-      console.log("data....... is:::::", data)
-      setIsUpdate(true)
-      setUpdateState(data)
-      setUpdateId(id)
+  const handleUpdate = (id) => {
+    let data = dataList.find((item) => item.id === id);
+    console.log('data....... is:::::', data);
+    setIsUpdate(true);
+    setUpdateState(data);
+    setUpdateId(id);
 
-
-      console.log("setUpdated.........status....................................", updateState)
-  }
-
-  const handleFormSubmit = (values) => {
-      console.log("isupdated...", isUpdate)
-      console.log("is..updaedId", updatedId)
-      if(isUpdate){
-        //update thing coming
-        let datalist = [...dataList]
-        let udpatedIndex = datalist.findIndex(item => item.id == updatedId)
-        console.log("updatedIndex", udpatedIndex)
-        datalist[udpatedIndex] = values
-        setDataList(datalist)
-
-      setUpdateState({
-        name: "",
-        email: "",
-        mobile: "",
-        project: "",
-        task: "",
-        status: "",
-        start_time: "",
-        end_time: "",
-      })
-        
-      }else{
-        setDataList([...dataList, values]);
-      }
-
-      setIsUpdate(false)
-   
-    // fetchData()
+    console.log('setUpdated.........status....................................', updateState);
   };
 
+  const handleFormSubmit = (values) => {
+    console.log('isupdated...', isUpdate);
+    console.log('is..updaedId', updatedId);
+    if (isUpdate) {
+      //update thing coming
+      let datalist = [...dataList];
+      let udpatedIndex = datalist.findIndex((item) => item.id == updatedId);
+      console.log('updatedIndex', udpatedIndex);
+      datalist[udpatedIndex] = values;
+      setDataList(datalist);
+
+      setUpdateState({
+        name: '',
+        email: '',
+        mobile: '',
+        project: '',
+        task: '',
+        status: '',
+        start_time: '',
+        end_time: ''
+      });
+    } else {
+      setDataList([...dataList, values]);
+    }
+
+    setIsUpdate(false);
+
+    // fetchData()
+  };
 
   function handleselect(e) {
     let selected = e.target.value;
     setIsFilter(true);
-    if (selected === "all") {
+    if (selected === 'all') {
       setIsFilter(false);
     } else {
       let x = dataList.filter((a) => a.status == selected);
@@ -99,14 +94,14 @@ const DataCrud = () => {
 
   const viewFields = (values) => {
     setDataView(values);
-    console.log("values", dataView);
+    console.log('values', dataView);
   };
   useEffect(() => {
     fetchData();
   }, []);
 
   const handleData = () => {
-    console.log("datalist.... my ", dataList);
+    console.log('datalist.... my ', dataList);
   };
   useEffect(() => {
     handleData();
@@ -115,7 +110,7 @@ const DataCrud = () => {
   return (
     <div>
       <Formik
-      enableReinitialize = {true}
+        enableReinitialize={true}
         initialValues={updateState}
         validationSchema={ToDoUserSchema}
         onSubmit={handleFormSubmit}
@@ -202,7 +197,7 @@ const DataCrud = () => {
                         <div className="error">{errors.start_time}</div>
                       </div>
                       <div className="input-form">
-                        <label htmlFor="end-date">Start Date</label>
+                        <label htmlFor="end-date">End Date</label>
                         <input
                           type="date"
                           id="end-date"
@@ -246,19 +241,12 @@ const DataCrud = () => {
                           {/* <div className='error'>{errors.status}</div> */}
                         </div>
                       </div>
-                      <button
-                        type="submit"
-                        className="btn success"
-                        onClick={handleSubmit}
-                      >
-                        {isUpdate? "Update":"Submit"}
+                      <button type="submit" className="btn success" onClick={handleSubmit}>
+                        {isUpdate ? 'Update' : 'Submit'}
                       </button>
                       &nbsp;
-                      <button
-                        className="btn warning btn-view"
-                        onClick={() => viewFields(values)}
-                      >
-                        {" "}
+                      <button className="btn warning btn-view" onClick={() => viewFields(values)}>
+                        {' '}
                         View
                       </button>
                     </div>
@@ -354,7 +342,6 @@ const DataCrud = () => {
           </div>
         )}
       </Formik>
-
     </div>
   );
 };

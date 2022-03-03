@@ -1,5 +1,5 @@
-import "./App.css";
-import DataCrud from "./components/DataCrud";
+import './App.css';
+import DataCrud from './components/DataCrud';
 // import DataList from "./components/DataList";
 
 function App() {
