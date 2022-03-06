@@ -32,7 +32,9 @@ const DataCrud = () => {
     let deletedData = [...dataList];
     let deletedSnapData = [...snapShot];
     let eleIndex = deletedData.findIndex((item) => item.id === id);
-    let eleIndexinFilter = snapShot.findIndex((item) => item.id === id);
+    let eleIndexinFilter = deletedSnapData.findIndex((item) => item.id === id);
+    console.log('element snap deleted index =>', eleIndex);
+    console.log('element snap deleted index =>', eleIndexinFilter);
     deletedData.splice(eleIndex, 1);
     setDataList(deletedData);
     if (eleIndexinFilter >= 0) {
@@ -73,6 +75,9 @@ const DataCrud = () => {
         end_time: ''
       });
     } else {
+      let id = dataList.length;
+      values.id = id + 1;
+      // console.log('id deleted ');
       setDataList([...dataList, values]);
     }
 
@@ -245,10 +250,9 @@ const DataCrud = () => {
                         {isUpdate ? 'Update' : 'Submit'}
                       </button>
                       &nbsp;
-                      <button className="btn warning btn-view" onClick={() => viewFields(values)}>
-                        {' '}
+                      {/* <button className="btn warning btn-view" onClick={() => viewFields(values)}>
                         View
-                      </button>
+                      </button> */}
                     </div>
                   </form>
                 </div>
@@ -264,6 +268,7 @@ const DataCrud = () => {
                   <table className="table">
                     <thead>
                       <tr>
+                        <th>Index</th>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -281,6 +286,7 @@ const DataCrud = () => {
                         ? dataList.map((item, i) => (
                             <tr key={i}>
                               <td>{i}</td>
+                              <td>{item.id}</td>
                               <td>{item.name}</td>
                               <td>{item.email}</td>
                               <td>{item.mobile}</td>
@@ -309,6 +315,7 @@ const DataCrud = () => {
                         : snapShot.map((item, i) => (
                             <tr key={i}>
                               <td>{i}</td>
+                              <td>{item.id}</td>
                               <td>{item.name}</td>
                               <td>{item.email}</td>
                               <td>{item.mobile}</td>
