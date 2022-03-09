@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { ToDoUserSchema } from './ValidationSchema';
-import { Field, Formik } from 'formik';
-import { data } from './_data';
+import React, { useEffect, useState } from "react";
+import { ToDoUserSchema } from "./ValidationSchema";
+import { Field, Formik } from "formik";
+import { data } from "./_data";
 
 const DataCrud = () => {
   const [dataList, setDataList] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
   const [updatedId, setUpdateId] = useState(undefined);
   const [updateState, setUpdateState] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-    project: '',
-    task: '',
-    status: '',
-    start_time: '',
-    end_time: ''
+    id: null,
+    name: "",
+    email: "",
+    mobile: "",
+    project: "",
+    task: "",
+    status: "",
+    start_time: "",
+    end_time: "",
   });
 
   const [snapShot, setSnapShot] = useState([]);
@@ -33,8 +34,8 @@ const DataCrud = () => {
     let deletedSnapData = [...snapShot];
     let eleIndex = deletedData.findIndex((item) => item.id === id);
     let eleIndexinFilter = deletedSnapData.findIndex((item) => item.id === id);
-    console.log('element snap deleted index =>', eleIndex);
-    console.log('element snap deleted index =>', eleIndexinFilter);
+    console.log("element snap deleted index =>", eleIndex);
+    console.log("element snap deleted index =>", eleIndexinFilter);
     deletedData.splice(eleIndex, 1);
     setDataList(deletedData);
     if (eleIndexinFilter >= 0) {
@@ -45,40 +46,47 @@ const DataCrud = () => {
 
   const handleUpdate = (id) => {
     let data = dataList.find((item) => item.id === id);
-    console.log('data....... is:::::', data);
+    console.log("data....... is:::::", data);
     setIsUpdate(true);
     setUpdateState(data);
     setUpdateId(id);
 
-    console.log('setUpdated.........status....................................', updateState);
+    console.log(
+      "setUpdated.........status....................................",
+      updateState
+    );
   };
 
   const handleFormSubmit = (values) => {
-    console.log('isupdated...', isUpdate);
-    console.log('is..updaedId', updatedId);
     if (isUpdate) {
       //update thing coming
+      console.log("isUpdating..calling......");
       let datalist = [...dataList];
       let udpatedIndex = datalist.findIndex((item) => item.id == updatedId);
-      console.log('updatedIndex', udpatedIndex);
+      console.log("updatedIndex", udpatedIndex);
       datalist[udpatedIndex] = values;
       setDataList(datalist);
 
       setUpdateState({
-        name: '',
-        email: '',
-        mobile: '',
-        project: '',
-        task: '',
-        status: '',
-        start_time: '',
-        end_time: ''
+        name: "",
+        email: "",
+        mobile: "",
+        project: "",
+        task: "",
+        status: "",
+        start_time: "",
+        end_time: "",
       });
     } else {
-      let id = dataList.length;
-      values.id = id + 1;
-      // console.log('id deleted ');
-      setDataList([...dataList, values]);
+      console.log("addd callimggg", values);
+
+      let datalistDub = [...dataList];
+      let addValue = { ...values };
+      // let id = datalistDub.length;
+      addValue.id = datalistDub.length + 1;
+
+      console.log("2", addValue);
+      setDataList([...datalistDub, addValue]);
     }
 
     setIsUpdate(false);
@@ -89,7 +97,7 @@ const DataCrud = () => {
   function handleselect(e) {
     let selected = e.target.value;
     setIsFilter(true);
-    if (selected === 'all') {
+    if (selected === "all") {
       setIsFilter(false);
     } else {
       let x = dataList.filter((a) => a.status == selected);
@@ -99,19 +107,15 @@ const DataCrud = () => {
 
   const viewFields = (values) => {
     setDataView(values);
-    console.log('values', dataView);
+    console.log("values", dataView);
   };
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleData = () => {
-    console.log('datalist.... my ', dataList);
-  };
   useEffect(() => {
-    handleData();
+    console.log("saaaaaaaaaaaaaaa", dataList);
   }, [dataList]);
-
   return (
     <div>
       <Formik
@@ -246,8 +250,12 @@ const DataCrud = () => {
                           {/* <div className='error'>{errors.status}</div> */}
                         </div>
                       </div>
-                      <button type="submit" className="btn success" onClick={handleSubmit}>
-                        {isUpdate ? 'Update' : 'Submit'}
+                      <button
+                        type="submit"
+                        className="btn success"
+                        onClick={handleSubmit}
+                      >
+                        {isUpdate ? "Update" : "Submit"}
                       </button>
                       &nbsp;
                       {/* <button className="btn warning btn-view" onClick={() => viewFields(values)}>
@@ -268,7 +276,7 @@ const DataCrud = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>Index</th>
+                        {/* <th>Index</th> */}
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -285,7 +293,7 @@ const DataCrud = () => {
                       {!isFilter
                         ? dataList.map((item, i) => (
                             <tr key={i}>
-                              <td>{i}</td>
+                              {/* <td>{i}</td> */}
                               <td>{item.id}</td>
                               <td>{item.name}</td>
                               <td>{item.email}</td>
@@ -314,7 +322,7 @@ const DataCrud = () => {
                           ))
                         : snapShot.map((item, i) => (
                             <tr key={i}>
-                              <td>{i}</td>
+                              {/* <td>{i}</td> */}
                               <td>{item.id}</td>
                               <td>{item.name}</td>
                               <td>{item.email}</td>
