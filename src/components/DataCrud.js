@@ -57,7 +57,7 @@ const DataCrud = () => {
     );
   };
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values, { resetForm }) => {
     if (isUpdate) {
       //update thing coming
       console.log("isUpdating..calling......");
@@ -87,6 +87,16 @@ const DataCrud = () => {
 
       console.log("2", addValue);
       setDataList([...datalistDub, addValue]);
+      resetForm({
+        name: "",
+        email: "",
+        mobile: "",
+        project: "",
+        task: "",
+        status: "",
+        start_time: "",
+        end_time: "",
+      });
     }
 
     setIsUpdate(false);
@@ -224,6 +234,7 @@ const DataCrud = () => {
                             id="planned"
                             name="status"
                             value="planned"
+                            checked
                             // onChange={(e) => setStatus(e.target.value)}
                           />
                           <label htmlFor="planned">planned</label>
