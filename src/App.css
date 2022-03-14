@@ -108,3 +108,62 @@ gap: 15px;
 .form-control-data{
   min-width: 300px;
 }
+.form-control{
+  border: 1px solid #bcbcbc;
+  border-radius: 7px;
+
+}
+
+.form-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form-control{
+  padding:7px 15px;
+  width: auto;
+
+}
+.form-control:focus{
+  outline: 1px solid rebeccapurple;
+  border:1px solid rebeccapurple;
+}
+.table-view{
+  width: 100%;
+  margin: 15px ;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.table-view .header{
+  display: grid;
+  grid-template-columns: 100px 150px 150px 150px ;
+  gap: 15px;
+padding: 7px 15px ;
+background: #777777;
+}
+.table-view .table-cell{
+  display: grid;
+  grid-template-columns: 100px 150px 150px 150px ;
+  gap: 15px;
+padding: 7px 15px ;
+background: #777777;
+text-align: center;
+background: white;
+border: 1px solid gray;
+}
+.table-view .table-cat{
+  border: 1px solid gray;
+  padding: 7px 15px ;
+  background: rebeccapurple;
+  color: white;
+}
+.search{
+  padding: 7px 15px;
+  background-color: rebeccapurple;
+  color: white;
+  border:none;
+  outline:none;
+}

@@ -45,4 +45,65 @@ let data = [
   },
 ];
 
-export { data };
+const searchShopData = [
+  {
+    name: "Football",
+    price: "$38",
+    qty: 25,
+    category: "sporting",
+    cart: false,
+  },
+  {
+    name: "Baseball",
+    price: "$35",
+    qty: 23,
+    category: "sporting",
+  },
+  {
+    name: "Basketball",
+    price: "$40",
+    qty: 0,
+    category: "sporting",
+    cart: false,
+  },
+  {
+    name: "Ipad",
+    price: "$8320",
+    qty: 23,
+    category: "electronics",
+    cart: false,
+  },
+  {
+    name: "Nexus 7",
+    price: "$5609",
+    qty: 42,
+    category: "electronics",
+    cart: false,
+  },
+  {
+    name: "Iphone 5",
+    price: "$6609",
+    qty: 0,
+    category: "electronics",
+  },
+  {
+    name: "Rings",
+    price: "$349",
+    qty: 0,
+    category: "jwellery",
+  },
+  {
+    name: "Neck pieces",
+    price: "$609",
+    qty: 5,
+    category: "jwellery",
+  },
+  {
+    name: "Ear rings",
+    price: "$1209",
+    qty: 10,
+    category: "jwellery",
+  },
+];
+
+export { data, searchShopData };
