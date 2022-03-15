@@ -10,18 +10,27 @@ const SearchData = () => {
   const handleSearch = (e) => {
     const searchContent = e.target.value;
     setSearchValue(searchContent);
-    if (isInStock) {
+
+    if (isInStock && e.target.value !== "") {
       let a = [...checkedTable];
-      let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
+      let findData = a.filter(
+        (item) =>
+          item.qty != 0 && item.qty >= 0 && item.category == e.target.value
+      );
       setSnapshot([...findData]);
+    } else if (isInStock && e.target.value == "") {
+      let a = [...checkedTable];
+
+      setSnapshot([...a]);
     } else {
-      if (e.target.value == "") {
-        setSnapshot([...searchShopData]);
-      }
+      setSnapshot([...searchShopData]);
     }
   };
 
   const searchData = () => {
+    if (searchValue === "") {
+      return false;
+    }
     if (isInStock) {
       let a = [...checkedTable];
       let findData = a.filter((item) => item.category == searchValue);
@@ -36,13 +45,32 @@ const SearchData = () => {
   };
 
   function handleCheck(e) {
-    setSearchValue("");
+    // setSearchValue("");ś
     let ischecked = e.target.checked;
     setIsInStock(ischecked);
     let a = [...searchShopData];
     console.log("isstock available", isInStock);
     let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
-    if (ischecked) {
+
+    console.log("a...................", ischecked, "......and...", searchValue);
+
+    if (!ischecked && searchValue !== "") {
+      findData = a.filter((item) => item.category === searchValue);
+      setSnapshot([...findData]);
+      setCheckedTable([...findData]);
+    } else if (ischecked && searchValue !== "") {
+      console.log("coming...righ tpalce...");
+      findData = a
+        .filter((item) => item.category === searchValue)
+        .filter((item) => item.qty != 0 && item.qty >= 0);
+      setSnapshot([...findData]);
+      setCheckedTable([...findData]);
+    } else if (searchValue !== "") {
+      findData = a.filter((item) => item.category === searchValue);
+      setSnapshot([...findData]);
+      setCheckedTable([...findData]);
+    } else if (ischecked && searchValue === "") {
+      findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
       setSnapshot([...findData]);
       setCheckedTable([...findData]);
     } else {
