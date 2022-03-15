@@ -11,17 +11,28 @@ const SearchData = () => {
     const searchContent = e.target.value;
     setSearchValue(searchContent);
     if (isInStock) {
-      let a = [...checkedTable];
-      let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
-      setSnapshot([...findData]);
+      if (e.target.value !== "") {
+        let a = [...checkedTable];
+        let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
+        setSnapshot([...findData]);
+      } else {
+        console.log("helllooooo");
+        let a = [...searchShopData];
+        let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
+        setSnapshot([...findData]);
+      }
     } else {
-      if (e.target.value == "") {
+      if (searchContent == "") {
         setSnapshot([...searchShopData]);
       }
     }
   };
 
   const searchData = () => {
+    if (searchValue === "") {
+      return false;
+    }
+
     if (isInStock) {
       let a = [...checkedTable];
       let findData = a.filter((item) => item.category == searchValue);
@@ -36,17 +47,33 @@ const SearchData = () => {
   };
 
   function handleCheck(e) {
-    setSearchValue("");
+    // setSearchValue("");
     let ischecked = e.target.checked;
     setIsInStock(ischecked);
     let a = [...searchShopData];
     console.log("isstock available", isInStock);
-    let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
     if (ischecked) {
-      setSnapshot([...findData]);
-      setCheckedTable([...findData]);
+      if (searchValue !== "") {
+        let findData = a.filter(
+          (item) =>
+            item.qty != 0 && item.qty >= 0 && item.category === searchValue
+        );
+        setSnapshot([...findData]);
+        setCheckedTable([...findData]);
+      } else {
+        let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
+        setSnapshot([...findData]);
+        setCheckedTable([...findData]);
+      }
     } else {
-      setSnapshot([...searchShopData]);
+      if (searchValue !== "") {
+        let findData = a.filter((item) => item.category === searchValue);
+        setSnapshot([...findData]);
+        setCheckedTable([...findData]);
+      } else {
+        setSnapshot([...searchShopData]);
+        setCheckedTable([...searchShopData]);
+      }
     }
   }
   useEffect(() => {
@@ -89,13 +116,11 @@ const SearchData = () => {
           {snapshot &&
             snapshot.map((item, i) => (
               <div className="table-body" key={i}>
-                {/* <div className="table-cat"></div> */}
                 <div className="table-cell">
                   <div>{item?.name}</div>
                   <div>{item?.price}</div>
                   <div>{item?.qty}</div>
                   <div>{item?.category}</div>
-                  {/* <div>{item.cart ? "Added in cart" : "in Stock"}</div> */}
                 </div>
               </div>
             ))}

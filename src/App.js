@@ -11,6 +11,7 @@ function App() {
       <div className="content">
         {/* <DataList /> */}
         <SearchData />
+        {/* <Temp /> */}
         {/* <DataCrud /> */}
       </div>
       <div className="footer"></div>
