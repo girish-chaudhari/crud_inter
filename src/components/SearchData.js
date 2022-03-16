@@ -4,27 +4,20 @@ import { searchShopData } from "./_data";
 const SearchData = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isInStock, setIsInStock] = useState(false);
-  const [checkedTable, setCheckedTable] = useState([]);
   const [snapshot, setSnapshot] = useState([]);
 
   const handleSearch = (e) => {
     const searchContent = e.target.value;
     setSearchValue(searchContent);
-    if (isInStock) {
-      if (e.target.value !== "") {
-        let a = [...checkedTable];
-        let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
-        setSnapshot([...findData]);
-      } else {
-        console.log("helllooooo");
+    if (searchContent == "") {
+      if (isInStock) {
         let a = [...searchShopData];
         let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
         setSnapshot([...findData]);
-      }
-    } else {
-      if (searchContent == "") {
+      } else {
         setSnapshot([...searchShopData]);
       }
+    } else {
     }
   };
 
@@ -32,17 +25,31 @@ const SearchData = () => {
     if (searchValue === "") {
       return false;
     }
+    console.log("click");
 
     if (isInStock) {
-      let a = [...checkedTable];
-      let findData = a.filter((item) => item.category == searchValue);
-      setSnapshot([...findData]);
+      if (searchValue !== "") {
+        let a = [...searchShopData];
+        let findData = a.filter(
+          (item) =>
+            item.qty != 0 && item.qty >= 0 && item.category == searchValue
+        );
+        setSnapshot([...findData]);
+        console.log("helllooooo2");
+      } else {
+        console.log("helllooooo1");
+        let a = [...searchShopData];
+        let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
+        setSnapshot([...findData]);
+      }
     } else {
-      let a = [...searchShopData];
-      console.log(a);
-      let findData = a.filter((item) => item.category == searchValue);
-      console.log("findData", findData);
-      setSnapshot([...findData]);
+      if (searchValue !== "") {
+        let a = [...searchShopData];
+        let findData = a.filter((item) => item.category === searchValue);
+        setSnapshot([...findData]);
+      } else {
+        setSnapshot([...searchShopData]);
+      }
     }
   };
 
@@ -51,7 +58,7 @@ const SearchData = () => {
     let ischecked = e.target.checked;
     setIsInStock(ischecked);
     let a = [...searchShopData];
-    console.log("isstock available", isInStock);
+    // console.log("isstock available", isInStock);
     if (ischecked) {
       if (searchValue !== "") {
         let findData = a.filter(
@@ -59,20 +66,16 @@ const SearchData = () => {
             item.qty != 0 && item.qty >= 0 && item.category === searchValue
         );
         setSnapshot([...findData]);
-        setCheckedTable([...findData]);
       } else {
         let findData = a.filter((item) => item.qty != 0 && item.qty >= 0);
         setSnapshot([...findData]);
-        setCheckedTable([...findData]);
       }
     } else {
       if (searchValue !== "") {
         let findData = a.filter((item) => item.category === searchValue);
         setSnapshot([...findData]);
-        setCheckedTable([...findData]);
       } else {
         setSnapshot([...searchShopData]);
-        setCheckedTable([...searchShopData]);
       }
     }
   }
